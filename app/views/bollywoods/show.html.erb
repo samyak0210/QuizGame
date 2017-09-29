@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Quiz App</a><br />
+          <a class="navbar-brand" href="/bollywoods">Leader Board</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <% if current_user.admin==true %>
+          <li><a href="/admin">Go to admin page</a></li>
+        <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+</nav>
+
+
+<% if @bollywood.MultiChoice %>
+  <form method="GET" action="#">
+    <h4>
+      <strong>Type: More Than One Correct</strong><br /><br />
+      <strong>Question: </strong> <%= @bollywood.question %><br /><br />  
+      <%= check_box_tag(:A) %> <%= @bollywood.o1 %><br /><br />
+      <%= check_box_tag(:B) %> <%= @bollywood.o2 %><br /><br />
+      <%= check_box_tag(:C) %> <%= @bollywood.o3 %><br /><br />
+      <%= check_box_tag(:D) %> <%= @bollywood.o4 %><br /><br />
+    </h4>
+<% else %>
+  <form method="GET" action="#">
+    <h4>
+      <strong>Type: Single Correct</strong><br /><br />
+      <strong>Question: </strong> <%= @bollywood.question %><br /><br />  
+      <input type="radio" name="ans" value="A"> <%= @bollywood.o1 %><br /><br />
+      <input type="radio" name="ans" value="B"><%= @bollywood.o2 %><br /><br />
+      <input type="radio" name="ans" value="C"><%= @bollywood.o3 %><br /><br />
+      <input type="radio" name="ans" value="D"> <%= @bollywood.o4 %><br /><br />
+    </h4>
+<% end %>
+<h3>Your Score is : <b><%= @lbd.Bscore %></b></h3>
+  <% if Bollywood.count()==@bollywood.id %>
+    <input type="Submit" name="Submit" value="Finish" class="btn btn-info"/>
+  <% else %>
+    <input type="Submit" name="Submit" value="Submit" class="btn btn-info" / >
+  <% end %>

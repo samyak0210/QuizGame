@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Quiz App</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+        	<li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        	<% if current_user.admin==true %>
+		      <li><a href="/admin">Go to admin page</a></li>
+		    <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+</nav>
+<center><%= link_to "Start Over", '/footballs/1', class: "btn btn-info" %></center><br />
+
+<% if @lboard.curf > 0 %>  
+	<% if @lboard.curf != Football.count() %>
+		<center><%= link_to "Resume",'/footballs/'+(@lboard.curf).to_s, class: "btn btn-info" %></center>
+	<% end %>
+<% end %>
+	<br />
+	<h3 style="text-align: center;"> Your Current Score In the quiz : <b><%= @lboard.Fscore %></b></h3>
+
+
+<table class="table table-hover">
+	<thead>
+	  	<tr>
+			<th style="text-align: center;">Email</th>
+			<th style="text-align: left;">Score(Max)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bol.each do |bol| %>
+		<tr>
+			<td style="text-align: center;"><%= User.find(bol.user_id).email %></td>
+			<td style="text-align: left;"><%= bol.maxf %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

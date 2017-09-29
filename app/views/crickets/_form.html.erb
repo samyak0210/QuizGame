@@ -1,0 +1,47 @@
+<%= form_with(model: cricket, local: true) do |form| %>
+  <% if cricket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cricket.errors.count, "error") %> prohibited this cricket from being saved:</h2>
+
+      <ul>
+      <% cricket.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :question %>
+    <%= form.text_field :question, id: :cricket_question %>
+  </div>
+
+  <div class="field">
+    <%= form.label :o1 %>
+    <%= form.text_field :o1, id: :cricket_o1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :o2 %>
+    <%= form.text_field :o2, id: :cricket_o2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :o3 %>
+    <%= form.text_field :o3, id: :cricket_o3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :o4 %>
+    <%= form.text_field :o4, id: :cricket_o4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :correctans %>
+    <%= form.text_field :correctans, id: :cricket_correctans %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

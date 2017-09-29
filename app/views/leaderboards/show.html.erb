@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @leaderboard.user %>
+</p>
+
+<p>
+  <strong>Cscore:</strong>
+  <%= @leaderboard.Cscore %>
+</p>
+
+<p>
+  <strong>Fscore:</strong>
+  <%= @leaderboard.Fscore %>
+</p>
+
+<p>
+  <strong>Bscore:</strong>
+  <%= @leaderboard.Bscore %>
+</p>
+
+<p>
+  <strong>Hscore:</strong>
+  <%= @leaderboard.Hscore %>
+</p>
+
+<%= link_to 'Edit', edit_leaderboard_path(@leaderboard) %> |
+<%= link_to 'Back', leaderboards_path %>

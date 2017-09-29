@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Quiz App</a><br />
+          <a class="navbar-brand" href="/footballs">Leader Board</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+          <% if current_user.admin==true %>
+          <li><a href="/admin">Go to admin page</a></li>
+        <% end %>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+</nav>
+
+<% if @football.MultiChoice %>
+  <form method="GET" action="#">
+    <h4>
+      <strong>Type: More Than One Correct</strong><br /><br />
+      <strong>Question: </strong> <%= @football.question %><br /><br />  
+      <%= check_box_tag(:A) %> <%= @football.o1 %></li><br /><br />
+      <%= check_box_tag(:B) %> <%= @football.o2 %></li><br /><br />
+      <%= check_box_tag(:C) %> <%= @football.o3 %></li><br /><br />
+      <%= check_box_tag(:D) %> <%= @football.o4 %></li><br /><br />
+    </h4>
+<% else %>
+  <form method="GET" action="#">
+    <h4>
+      <strong>Type: Single Correct</strong><br /><br />
+      <strong>Question: </strong> <%= @football.question %><br /><br />  
+      <input type="radio" name="ans" value="A"> <%= @football.o1 %><br /><br />
+      <input type="radio" name="ans" value="B"> <%= @football.o2 %><br /><br />
+      <input type="radio" name="ans" value="C"> <%= @football.o3 %><br /><br />
+      <input type="radio" name="ans" value="D"> <%= @football.o4 %><br /><br />
+    </h4>
+<% end %>
+<h3>Your Score is : <b><%= @lbd.Fscore %></b></h3>
+  <% if Football.count()==@football.id %>
+    <input type="Submit" name="Submit" value="Finish" class="btn btn-info" />
+  <% else %>
+    <input type="Submit" name="Submit" value="Submit" class="btn btn-info">
+  <% end %>

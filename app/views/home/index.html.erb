@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+<% if current_user %>
+	<% if current_user.admin==true %>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span>Hi Admin!</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+		      <li><a href="/admin">Go to admin page</a></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+    </nav>
+  <% else %>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-user"></span>Hi <%= current_user.email %>!</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+    </nav>
+    <p id="notice" style="text-align: center;"><%= notice %></p>
+	<% end %>
+  <h1 style="text-align: center;">Quiz App</h1>
+  	<ul><h3>Sports</h3>
+       <ul class="list-group">
+          <a href="/crickets"><li class="list-group-item list-group-item-success">Cricket
+            <% if Leaderboard.find_by_user_id(current_user.id).crikcheck == true %>
+              <span style="color: green">(Attempted)</span>
+            <% else %>
+              <span style="color: red">(Not Attempted)</span>
+            <% end %>
+          </li></a>
+          <a href="/footballs"><li class="list-group-item list-group-item-info">Football
+            <% if Leaderboard.find_by_user_id(current_user.id).footcheck == true %>
+              <span style="color: green">(Attempted)</span>
+            <% else %>
+              <span style="color: red">(Not Attempted)</span>
+            <% end %>
+          </li></a>
+        </ul> 
+      
+      <br />
+  	</ul>
+  	<ul><h3>Movies</h3>
+  		<ul class="list-group">
+        <a href="/hollywoods"><li class="list-group-item list-group-item-warning">Hollywood
+          <% if Leaderboard.find_by_user_id(current_user.id).hollycheck == true %>
+            <span style="color: green">(Attempted)</span>
+          <% else %>
+            <span style="color: red">(Not Attempted)</span>
+          <% end %>    
+        </li></a>
+        <a href="/bollywoods"><li class="list-group-item list-group-item-danger">Bollywood
+          <% if Leaderboard.find_by_user_id(current_user.id).bollycheck == true %>
+            <span style="color: green">(Attempted)</span>
+          <% else %>
+            <span style="color: red">(Not Attempted)</span>
+          <% end %>
+      </li></a>
+        
+      <br />
+  	 </ul>
+    </ul>
+<%else %>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </nav>
+  <h1 style="text-align: center;">Quiz App</h1>
+<% end %>
